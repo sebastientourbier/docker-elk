@@ -55,8 +55,8 @@
           ```
 
       4.2  From my machine
-
-          I opened https://es.test4.thehip.app:9200 in my browser and enter the elastic credentials (user: elastic, pwd: changeme)
+      
+      I opened https://es.test4.thehip.app:9200 in my browser and enter the elastic credentials (user: elastic, pwd: changeme)
 
 5.   Configure to start the stack at login by creating a `~/.bashrc` with the following content:
 
