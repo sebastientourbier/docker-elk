@@ -2,7 +2,7 @@
 
 # Steps
 
-1.   Installed docker engine following instructions at https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
+1.   Installed docker engine and docker compose with `apt-get` following instructions at https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
 
 2.   Clone repo https://github.com/deviantony/docker-elk and switch to the branch `tls`
 
