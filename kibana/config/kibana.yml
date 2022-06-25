@@ -21,3 +21,8 @@ elasticsearch.password: ${KIBANA_SYSTEM_PASSWORD}
 ## see https://www.elastic.co/guide/en/kibana/current/configuring-tls.html#configuring-tls-kib-es
 #
 elasticsearch.ssl.certificateAuthorities: [ "config/elasticsearch-ca.pem" ]
+
+# TLS encryption of traffic with browser
+server.ssl.enabled: true
+server.ssl.certificate: /usr/share/kibana/config/ca.crt
+server.ssl.key: /usr/share/kibana/config/ca.key
