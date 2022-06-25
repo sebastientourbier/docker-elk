@@ -12,7 +12,7 @@
      $ git checkout -t origin/tls
      ```
      
-     Note that during the exercise I cloned the original repository but it could have also clone directly this repo.
+     Note that during the exercise I cloned the original repository and moved to the tls branch, which have not been proagated to my fork.
 
 3.   Build and run the ELK stack
 
@@ -69,5 +69,14 @@
      cd ~
      ```
      
-This is all I managed to do within the 4 hours. I was not familiar with the elasticsearch and ELK stack and it took me some time to find a solution for the TLS encryption. I am sorry but I did not have time to ingest a log with logstash and display it with Elasticsearch.
+This is all I managed to do within the 4 hours. I was not familiar with the elasticsearch and ELK stack and it took me some time to find a solution for the TLS encryption. I am sorry but I did not have time to ingest a log with logstash and display it with Elasticsearch. Also later, I realized that my connection to Kibana was also not secured.
+
+## Note
+
+I could not let this project uncompleted, and so I decided to keep working on this using my local setup. :grin:
+
+A fully working solution is accessible on the `tls` branch of this repo: https://github.com/sebastientourbier/docker-elk/tree/tls
+
+I created the following PR to easily track the different changes I made to allow TLS encryption for Elasticsearch and Kinaba, as well as the data ingestion with Logstash: https://github.com/sebastientourbier/docker-elk/pull/1/files
+
     
