@@ -62,6 +62,7 @@ services:
     volumes:
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro,Z
       - ./logstash/pipeline:/usr/share/logstash/pipeline:ro,Z
+      - ./logstash/input-logs/apache_log:/usr/share/logstash/config/apache_log:ro,Z
       # (!) CA certificate. Generate using instructions from tls/README.md
       - ./tls/kibana/elasticsearch-ca.pem:/usr/share/logstash/config/elasticsearch-ca.pem:ro,z
     ports:
