@@ -86,6 +86,8 @@ services:
       - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro,Z
       # (!) CA certificate. Generate using instructions from tls/README.md.
       - ./tls/kibana/elasticsearch-ca.pem:/usr/share/kibana/config/elasticsearch-ca.pem:ro,z
+      - ./tls/kibana/ca/ca.crt:/usr/share/kibana/config/ca.crt:Z
+      - ./tls/kibana/ca/ca.key:/usr/share/kibana/config/ca.key:Z
     ports:
       - "5601:5601"
     environment:
