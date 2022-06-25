@@ -1,18 +1,42 @@
+@@ -1,73 +0,0 @@
 # Report for the Devops exercise
 
-# Steps
+This repo builds on the original repo https://github.com/deviantony/docker-elk.
 
-1.   Installed docker engine and docker compose with `apt-get` following instructions at https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository. I also added $USER to the docker group.
+In brief:
+- I have reintegrated all changes made in the `tls` branch of the original repo,
+  that provides TLS encryption for Elasticsearch.
+- I have regenerated all TLS certificates following the original instructions [tls/README.md](./tls/README.md).
+- I generated an additional new pair of ``ca.crt/ca.key`` certificate for
+  the TLS encryption of the connection to Kibana.
+  Instructions for regeneration have been added to [tls/kibana/README.m](./tls/kibana/README.md).
 
-2.   Clone repo https://github.com/deviantony/docker-elk and switch to the branch `tls`
+Note that to reach this point, I worked further after the exercise and
+  my local machine, and so `tls/instances.yml` gives the configuration of
+  a local setup and not the setup of the exercise.
+In this sense, it should be modified to accommodate the 2 DNS and IP of the HIP server.
+In addition, the IP should be reviewed in the different configuration files
+  (i.e `elasticsearch/config/elasticsearch.yml`, `kibana/config/kibana.yml`,
+  `logstash/pipeline/logstash.conf`)
+
+# Instructions to setup and run the Elasticsearch/Logstash/Kibana stack using TLS encryption
+
+1.   Install docker engine and docker compose with `apt-get` following instructions
+     at https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository.
+     I also added $USER to the docker group.
+
+2.   Clone repo https://github.com/sebastientourbier/docker-elk and switch to the branch `tls`
 
      ```bash
-     $ git clone https://github.com/deviantony/docker-elk.git
+     $ git clone https://github.com/sebastientourbier/docker-elk.git
      $ cd docker-elk
      $ git checkout -t origin/tls
      ```
      
-     Note that during the exercise I cloned the original repository but it could have also clone directly this repo.
+     Note that during the exercise I cloned the original repository.
+     While the connection to elasticsearch was TLS-encrypted, the connection to Kibana was not.
+     In this version, I went further and made appropriate changes to achieve this,
+       including the generation of a new certificate
 
 3.   Build and run the ELK stack
 
@@ -27,9 +51,15 @@
      $ docker-compose ps
      ```
      
-4.   Tests
+     To stop the running containers:
 
-      4.1  On the server
+     ```bash
+     $ docker-compose down -v
+     ```
+     
+4.   Test Elasticsearch
+
+      4.1.  On the server
 
           ```bash
           $ curl https://es.test4.thehip.app:9200 -u elastic:changeme -k
@@ -56,11 +86,23 @@
           }
           ```
 
-      4.2  From my machine
+      4.2.  From my machine
       
-      I opened https://es.test4.thehip.app:9200 in my browser and enter the elastic credentials (user: elastic, pwd: changeme)
+      I opened https://es.test4.thehip.app:9200 in my browser and
+       enter the elastic credentials (user: elastic, pwd: changeme)
+      
+      Note that here, I am using the credentials by default.
+      To change it, please follow the instructions in the [README](README_original.md)
+       of the original repository.
 
-5.   Configure to start the stack at login by creating a `~/.bashrc` with the following content:
+5.   Test Kibana in the browser
+
+     On your machine, open https://es.test4.thehip.app:5601.
+     Then you can go to ``Stack Management`` and a create a new DataView
+       from the indexed data injected by Logstash
+     
+6.   Configure to start the stack at login by creating a `~/.bashrc`
+     with the following content:
 
      ```bash
      # Launch the ELK stack at startup
@@ -68,6 +110,3 @@
      docker-compose up -d
      cd ~
      ```
-     
-This is all I managed to do within the 4 hours. I was not familiar with the elasticsearch and ELK stack and it took me some time to find a solution for the TLS encryption. I am sorry but I did not have time to ingest a log with logstash and display it with Elasticsearch.
-    

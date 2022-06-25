@@ -33,7 +33,7 @@ NOTE:
 The sample configuration assumes that you have copied the "elasticsearch-ca.pem" file directly into the Kibana config
 directory without renaming it.
 
-## ca.crt / ca.key
+## ca.crt/ca.key
 
 The ``ca.crt`` / ``ca.key`` files are the 2 parts of the TLS certificate in PEM format used to
   encrypt the connection to Kibana via the browser. ``ca.crt`` is the signed certificate,
